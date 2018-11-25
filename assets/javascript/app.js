@@ -15,59 +15,68 @@ $("#submitbtn").on("click", function(e) {
   var trainName = $("#train_name")
     .val()
     .trim();
-  var trainTime = $("#train-input")
-    .val()
-    .trim();
   var destination = $("#destination-input")
     .val()
     .trim();
+  var trainTime = $("#train-input")
+    .val()
+    .trim();
+
   var frequency = $("#frequency-input")
     .val()
     .trim();
 
   var newTrain = {
     name: trainName,
-    time: trainTime,
     start: destination,
+    time: trainTime,
     freq: frequency
   };
 
   database.ref().push(newTrain);
   console.log(newTrain);
   $("#train_name").val("");
-  $("#train-input").val("");
   $("#destination-input").val("");
+  $("#train-input").val("");
   $("#frequency-input").val("");
 });
 
 database.ref().on("child_added", function(childSnapshot) {
   var newName = childSnapshot.val().name;
-  var newTime = childSnapshot.val().time;
   var newDest = childSnapshot.val().start;
+  var newTime = childSnapshot.val().time;
   var newFreq = childSnapshot.val().freq;
+
   $("#train-table>tbody").append(
     "<tr> <td>" +
       newName +
       "</td><td>" +
-      newTime +
-      "</td> <td>" +
       newDest +
+      "</td> <td>" +
+      newTime +
       "</td><td>" +
       newFreq +
       "</td><td>" +
       nextTrain +
       " </td></tr>"
   );
-  var currentTime = moment();
+  var currTime = moment();
+  console.log(currTime);
+  var firstTime = moment(newTime, "HH:mm").subtract(1, "years");
+  console.log(firstTime);
 
-  var diffTime = moment().diff(moment(currentTime), "minutes");
+  var diffTime = moment().diff(moment(firstTime), "minutes");
+  console.log("show me:" + diffTime);
+  var reminder = diffTime % newFreq;
+  console.log("show reminder:" + reminder);
+  var minAway = newFreq - reminder;
+  console.log("show me min:" + minAway);
+  var nextTrain = moment()
+    .add(minAway, "minutes")
+    .format("hh:mm");
 
-  var MinutesTillTrain = moment().subtract(newTime - diffTime);
-  console.log("MINUTES TILL TRAIN: " + MinutesTillTrain);
+  console.log("show me next train:" + nextTrain);
 
-  // Next Train
-  var nextTrain = moment().add(MinutesTillTrain, "minutes");
-  console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
   // console.log(newName);
   // console.log(newTime);
   // console.log(newDest);
