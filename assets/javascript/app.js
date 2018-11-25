@@ -47,22 +47,9 @@ database.ref().on("child_added", function(childSnapshot) {
   var newTime = childSnapshot.val().time;
   var newFreq = childSnapshot.val().freq;
 
-  $("#train-table>tbody").append(
-    "<tr> <td>" +
-      newName +
-      "</td><td>" +
-      newDest +
-      "</td> <td>" +
-      newTime +
-      "</td><td>" +
-      newFreq +
-      "</td><td>" +
-      nextTrain +
-      " </td></tr>"
-  );
   var currTime = moment();
   console.log(currTime);
-  var firstTime = moment(newTime, "HH:mm").subtract(1, "years");
+  var firstTime = moment(newTime, "HH:mm").subtract(1, "day");
   console.log(firstTime);
 
   var diffTime = moment().diff(moment(firstTime), "minutes");
@@ -74,6 +61,20 @@ database.ref().on("child_added", function(childSnapshot) {
   var nextTrain = moment()
     .add(minAway, "minutes")
     .format("hh:mm");
+
+  $("#train-table>tbody").append(
+    "<tr> <td>" +
+      newName +
+      "</td><td>" +
+      newDest +
+      "</td> <td>" +
+      newFreq +
+      "</td><td>" +
+      nextTrain +
+      "</td><td>" +
+      minAway +
+      " </td></tr>"
+  );
 
   console.log("show me next train:" + nextTrain);
 
