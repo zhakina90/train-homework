@@ -9,3 +9,5 @@ Please, click on link [train schedule aplication](https://zhakina90.github.io/tr
   [Database](https://console.firebase.google.com/project/train-time-assignment-ea900/database/train-time-assignment-ea900/data/ "Stored user's input information")
 
 - I used Moment.js to manipulate with time.
+
+* If users click on new added train information it would highlight to a different color.
