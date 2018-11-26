@@ -4,6 +4,10 @@ body {
   background-color: darkred;
 }
 h1 {
+  font-size: 25px;
+  text-shadow: 3px 3px yellow;
 }
 p {
+  font-size: 20px;
+  text-shadow: 2px 2px;
 }

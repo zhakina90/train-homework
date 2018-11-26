@@ -34,7 +34,7 @@ $("#submitbtn").on("click", function(e) {
   };
 
   database.ref().push(newTrain);
-  console.log(newTrain);
+  // console.log(newTrain);
   $("#train_name").val("");
   $("#destination-input").val("");
   $("#train-input").val("");
@@ -48,16 +48,16 @@ database.ref().on("child_added", function(childSnapshot) {
   var newFreq = childSnapshot.val().freq;
 
   var currTime = moment();
-  console.log(currTime);
+  // console.log(currTime);
   var firstTime = moment(newTime, "HH:mm").subtract(1, "day");
-  console.log(firstTime);
+  // console.log(firstTime);
 
   var diffTime = moment().diff(moment(firstTime), "minutes");
-  console.log("show me:" + diffTime);
+  // console.log("show me:" + diffTime);
   var reminder = diffTime % newFreq;
-  console.log("show reminder:" + reminder);
+  // console.log("show reminder:" + reminder);
   var minAway = newFreq - reminder;
-  console.log("show me min:" + minAway);
+  // console.log("show me min:" + minAway);
   var nextTrain = moment()
     .add(minAway, "minutes")
     .format("hh:mm");
@@ -76,7 +76,7 @@ database.ref().on("child_added", function(childSnapshot) {
       " </td></tr>"
   );
 
-  console.log("show me next train:" + nextTrain);
+  // console.log("show me next train:" + nextTrain);
 
   // console.log(newName);
   // console.log(newTime);
