@@ -11,3 +11,5 @@ Please, click on link [train schedule application](https://zhakina90.github.io/t
 - I used Moment.js to manipulate with time.
 
 * If users click on new added train information it would highlight to a different color.
+![train time] (/assets/images/traintime.png)
+![add train](/assets/images/addtrain.png)
