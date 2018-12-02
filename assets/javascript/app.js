@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //make the user input//
-$("#submitbtn").on("click", function(e) {
+$("#submitbtn").on("click", function (e) {
   e.preventDefault();
   var trainName = $("#train_name")
     .val()
@@ -41,7 +41,7 @@ $("#submitbtn").on("click", function(e) {
   $("#frequency-input").val("");
 });
 
-database.ref().on("child_added", function(childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
   var newName = childSnapshot.val().name;
   var newDest = childSnapshot.val().start;
   var newTime = childSnapshot.val().time;
@@ -64,16 +64,16 @@ database.ref().on("child_added", function(childSnapshot) {
 
   $("#train-table>tbody").append(
     "<tr> <td>" +
-      newName +
-      "</td><td>" +
-      newDest +
-      "</td> <td>" +
-      newFreq +
-      "</td><td>" +
-      nextTrain +
-      "</td><td>" +
-      minAway +
-      " </td></tr>"
+    newName +
+    "</td><td>" +
+    newDest +
+    "</td> <td>" +
+    newFreq +
+    "</td><td>" +
+    nextTrain +
+    "</td><td>" +
+    minAway +
+    " </td></tr>"
   );
 
   // console.log("show me next train:" + nextTrain);
